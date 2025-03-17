@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: network_service
+dependency_overrides:
+  network_service:
+    path: ..\\..\\packages\\network_service

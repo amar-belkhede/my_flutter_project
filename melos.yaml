@@ -1,4 +1,14 @@
 name: my_flutter_project
 packages:
-  - apps/*
-  - packages/*
+  - apps/**
+  - packages/**
+  - features/**
+
+scripts:
+  analyze:
+    command: flutter analyze .
+    description: Analyze the project
+  test:
+    command: flutter test
+    description: Run tests
+  format: dart format .

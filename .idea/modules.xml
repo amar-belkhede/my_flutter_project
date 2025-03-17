@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/apps/moviedb/melos_moviedb.iml" filepath="$PROJECT_DIR$/apps/moviedb/melos_moviedb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packages/network_service/melos_network_service.iml" filepath="$PROJECT_DIR$/packages/network_service/melos_network_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/melos_my_flutter_project.iml" filepath="$PROJECT_DIR$/melos_my_flutter_project.iml" />
+    </modules>
+  </component>
+</project>
