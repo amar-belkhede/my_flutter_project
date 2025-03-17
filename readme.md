@@ -57,3 +57,6 @@ flutter create --template=package packages/network_service
 
 https://app.quicktype.io/?l=dart
 flutter pub run build_runner build --delete-conflicting-outputs
+flutter clean
+flutter pub get
+flutter pub run build_runner build --delete-conflicting-outputs

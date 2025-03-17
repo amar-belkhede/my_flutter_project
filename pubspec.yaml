@@ -7,6 +7,7 @@ dependencies:
   bdd_widget_test: ^1.7.6
   build_runner: ^2.4.13
   dio: ^5.8.0+1
+  # pretty_dio_logger: ^1.4.0
   flow_builder: ^0.1.0
   flutter:
     sdk: flutter
