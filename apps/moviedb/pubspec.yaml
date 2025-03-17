@@ -39,6 +39,12 @@ dependencies:
   network_service:
     path: ../../packages/network_service
 
+  get_it: ^8.0.3
+  injectable: ^2.5.0
+  
+  
+  build: ^2.4.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -49,6 +55,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
+
+  build_runner: ^2.4.13
+  injectable_generator: ^2.6.2
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
