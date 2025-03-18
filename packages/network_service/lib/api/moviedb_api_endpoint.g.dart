@@ -22,7 +22,7 @@ class _MoviedbApiEndpoint implements MoviedbApiEndpoint {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<FilmModel> getDiscoverMovie({
+  Future<MovieResponse> getDiscoverMovie({
     String language = "en-US",
     bool includeAdult = false,
     int page = 1,
@@ -35,7 +35,7 @@ class _MoviedbApiEndpoint implements MoviedbApiEndpoint {
     };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<FilmModel>(Options(
+    final _options = _setStreamType<MovieResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -52,9 +52,9 @@ class _MoviedbApiEndpoint implements MoviedbApiEndpoint {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late FilmModel _value;
+    late MovieResponse _value;
     try {
-      _value = FilmModel.fromJson(_result.data!);
+      _value = MovieResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -63,7 +63,7 @@ class _MoviedbApiEndpoint implements MoviedbApiEndpoint {
   }
 
   @override
-  Future<FilmModel> getDiscoverTv({
+  Future<MovieResponse> getDiscoverTv({
     String language = "en-US",
     bool includeAdult = false,
     int page = 1,
@@ -76,7 +76,7 @@ class _MoviedbApiEndpoint implements MoviedbApiEndpoint {
     };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<FilmModel>(Options(
+    final _options = _setStreamType<MovieResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -93,9 +93,9 @@ class _MoviedbApiEndpoint implements MoviedbApiEndpoint {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late FilmModel _value;
+    late MovieResponse _value;
     try {
-      _value = FilmModel.fromJson(_result.data!);
+      _value = MovieResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

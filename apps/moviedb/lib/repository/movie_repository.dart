@@ -1,14 +1,11 @@
-import 'package:injectable/injectable.dart';
-import 'package:network_service/api/moviedb_api_endpoint.dart';
-import 'package:network_service/model/film_model.dart';
+import 'package:network_service/model/movie_response.dart';
+import 'package:database/table/movie_db.dart';
 
-@injectable
-class MovieRepository {
-  final MoviedbApiEndpoint _moviedbApiEndpoint;
 
-  MovieRepository(this._moviedbApiEndpoint);
-
-  Future<FilmModel> getDiscoverMovie() async {
-    return await _moviedbApiEndpoint.getDiscoverMovie();
-  }
+abstract class MovieRepository {
+  Future<MovieResponse> getDiscoverMovie();
+  Future<MovieResponse> getDiscoverTv();
+  void saveMovie(Movie movie);
+  Future<List<MovieDB>> getMovies();
+  void deleteMovie(MovieDB movie);
 }

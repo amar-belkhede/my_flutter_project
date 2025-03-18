@@ -39,9 +39,12 @@ dependencies:
   network_service:
     path: ../../packages/network_service
 
+  database:
+    path: ../../packages/database
+
   get_it: ^8.0.3
   injectable: ^2.5.0
-  
+  realm: ^20.0.1
   
   build: ^2.4.1
 

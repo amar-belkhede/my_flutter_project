@@ -12,3 +12,10 @@ scripts:
     command: flutter test
     description: Run tests
   format: dart format .
+  build_runner:
+    name: Build Runner to generate models
+    run: flutter pub run build_runner build --delete-conflicting-outputs && flutter pub global run melos exec "flutter pub run build_runner build --delete-conflicting-outputs"
+    description: Run `flutter build_runner` in selected packages
+  watch:
+    command: flutter pub global run melos exec "flutter pub run build_runner watch --delete-conflicting-outputs"
+    description: Run `flutter build_runner` in selected packages

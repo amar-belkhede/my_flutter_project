@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:moviedb/di/configure_dependency.dart';
+import 'package:moviedb/presenter/favorite_screen.dart';
 import 'package:moviedb/repository/movie_repository.dart';
+import 'package:moviedb/presenter/discover_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,36 +38,60 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    DiscoverScreen(),
+    FavoriteScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     final movieRepository = getIt<MovieRepository>();
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
-        ),
-        body: FutureBuilder(
-          future: movieRepository.getDiscoverMovie(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else {
-              return ListView.builder(
-                itemCount: snapshot.data?.results.length,
-                itemBuilder: (context, index) {
-                  final movie = snapshot.data?.results[index];
-                  return ListTile(
-                    title: Text(movie?.title ?? ""),
-                    subtitle: Text(movie?.overview ?? ""),
-                  );
-                },
-              );
-            }
-          },
-        )
-        // This trailing comma makes auto-formatting nicer for build methods.
-        );
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: _widgetOptions[_selectedIndex],
+      // body: FutureBuilder(
+      //   future: movieRepository.getDiscoverMovie(),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.connectionState == ConnectionState.waiting) {
+      //       return const Center(child: CircularProgressIndicator());
+      //     } else if (snapshot.hasError) {
+      //       return Center(child: Text('Error: ${snapshot.error}'));
+      //     } else {
+      //       return ListView.builder(
+      //         itemCount: snapshot.data?.movies?.length,
+      //         itemBuilder: (context, index) {
+      //           final movie = snapshot.data?.movies?[index];
+      //           return ListTile(
+      //             title: Text(movie?.title ?? ""),
+      //             subtitle: Text(movie?.overview ?? ""),
+      //             trailing: InkWell(
+      //                 onTap: () => movieRepository.saveMovie(movie!),
+      //                 child: Icon(Icons.bookmark_border_rounded)),
+      //           );
+      //         },
+      //       );
+      //     }
+      //   },
+      // ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.bookmark), label: 'Business'),
+          BottomNavigationBarItem(icon: Icon(Icons.school), label: 'School'),
+        ],
+        selectedItemColor: Theme.of(context).colorScheme.primary,
+        onTap: (value) {
+          setState(() {
+            _selectedIndex = value;
+          });
+        },
+      ),
+    );
   }
 }
