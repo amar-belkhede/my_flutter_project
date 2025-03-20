@@ -1,13 +1,29 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:moviedb/app_bloc_observer.dart';
 import 'package:moviedb/di/configure_dependency.dart';
-import 'package:moviedb/presenter/favorite_screen.dart';
+import 'package:moviedb/presenter/favorite/favorite_screen.dart';
 import 'package:moviedb/repository/movie_repository.dart';
-import 'package:moviedb/presenter/discover_screen.dart';
+import 'package:moviedb/presenter/discover/discover_screen.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
-  runApp(const MyApp());
+  BindingBase.debugZoneErrorsAreFatal = true;
+
+  runZonedGuarded(
+    () {
+      WidgetsFlutterBinding.ensureInitialized();
+      configureDependencies();
+      Bloc.observer = AppBlocObserver();
+      runApp(const MyApp());
+    },
+    (error, stack) {
+      debugPrint('❌ Uncaught Error: $error');
+      debugPrint('🔍 Stack Trace: $stack');
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {

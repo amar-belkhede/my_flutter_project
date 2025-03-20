@@ -14,6 +14,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:network_service/api/moviedb_api_endpoint.dart' as _i590;
 import 'package:network_service/dio_client.dart' as _i324;
 
+import '../presenter/discover/bloc/discover_bloc.dart' as _i659;
 import '../repository/movie_repository.dart' as _i550;
 import '../repository/movie_repository_impl.dart' as _i266;
 import 'di_module.dart' as _i211;
@@ -38,6 +39,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i590.MoviedbApiEndpoint>(),
           gh<_i517.RealmDatabase>(),
         ));
+    gh.lazySingleton<_i659.DiscoverBloc>(
+        () => _i659.DiscoverBloc(gh<_i550.MovieRepository>()));
     return this;
   }
 }
