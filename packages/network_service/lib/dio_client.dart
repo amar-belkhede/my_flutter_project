@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:network_service/interception/api_key_interceptor.dart';
 import 'package:network_service/interception/error_interceptor.dart';
@@ -16,8 +18,8 @@ class DioClient {
     const String baseUrl = "https://api.themoviedb.org/3";
     _dio = Dio(BaseOptions(
       baseUrl: baseUrl,
-      connectTimeout: const Duration(seconds: 30),
-      receiveTimeout: const Duration(seconds: 30),
+      connectTimeout: const Duration(seconds: 40),
+      receiveTimeout: const Duration(seconds: 40),
     ));
 
     _dio
@@ -41,11 +43,14 @@ class DioClient {
       ))
       ..interceptors.add(ApiKeyInterceptor())
       ..interceptors.add(ErrorInterceptor());
+
     // ..interceptors.add(LogInterceptor(
     //   requestBody: true,
     //   responseBody: true,
     //   requestHeader: true,
     //   responseHeader: true,
+    //   request: true,
+    //    logPrint: (object) => print(object.toString()), // Avoid truncation
     // ));
   }
 

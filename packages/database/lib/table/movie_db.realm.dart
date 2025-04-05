@@ -7,8 +7,9 @@ part of 'movie_db.dart';
 // **************************************************************************
 
 // ignore_for_file: type=lint
-class MovieDB extends _MovieDB with RealmEntity, RealmObjectBase, RealmObject {
-  MovieDB(
+class FavoriteMovieDB extends _FavoriteMovieDB
+    with RealmEntity, RealmObjectBase, RealmObject {
+  FavoriteMovieDB(
     bool adult,
     String backdropPath,
     int id,
@@ -41,7 +42,7 @@ class MovieDB extends _MovieDB with RealmEntity, RealmObjectBase, RealmObject {
     RealmObjectBase.set(this, 'voteCount', voteCount);
   }
 
-  MovieDB._();
+  FavoriteMovieDB._();
 
   @override
   bool get adult => RealmObjectBase.get<bool>(this, 'adult') as bool;
@@ -131,15 +132,17 @@ class MovieDB extends _MovieDB with RealmEntity, RealmObjectBase, RealmObject {
   set voteCount(int value) => RealmObjectBase.set(this, 'voteCount', value);
 
   @override
-  Stream<RealmObjectChanges<MovieDB>> get changes =>
-      RealmObjectBase.getChanges<MovieDB>(this);
+  Stream<RealmObjectChanges<FavoriteMovieDB>> get changes =>
+      RealmObjectBase.getChanges<FavoriteMovieDB>(this);
 
   @override
-  Stream<RealmObjectChanges<MovieDB>> changesFor([List<String>? keyPaths]) =>
-      RealmObjectBase.getChangesFor<MovieDB>(this, keyPaths);
+  Stream<RealmObjectChanges<FavoriteMovieDB>> changesFor(
+          [List<String>? keyPaths]) =>
+      RealmObjectBase.getChangesFor<FavoriteMovieDB>(this, keyPaths);
 
   @override
-  MovieDB freeze() => RealmObjectBase.freezeObject<MovieDB>(this);
+  FavoriteMovieDB freeze() =>
+      RealmObjectBase.freezeObject<FavoriteMovieDB>(this);
 
   EJsonValue toEJson() {
     return <String, dynamic>{
@@ -160,8 +163,8 @@ class MovieDB extends _MovieDB with RealmEntity, RealmObjectBase, RealmObject {
     };
   }
 
-  static EJsonValue _toEJson(MovieDB value) => value.toEJson();
-  static MovieDB _fromEJson(EJsonValue ejson) {
+  static EJsonValue _toEJson(FavoriteMovieDB value) => value.toEJson();
+  static FavoriteMovieDB _fromEJson(EJsonValue ejson) {
     if (ejson is! Map<String, dynamic>) return raiseInvalidEJson(ejson);
     return switch (ejson) {
       {
@@ -179,7 +182,7 @@ class MovieDB extends _MovieDB with RealmEntity, RealmObjectBase, RealmObject {
         'voteAverage': EJsonValue voteAverage,
         'voteCount': EJsonValue voteCount,
       } =>
-        MovieDB(
+        FavoriteMovieDB(
           fromEJson(adult),
           fromEJson(backdropPath),
           fromEJson(id),
@@ -200,9 +203,10 @@ class MovieDB extends _MovieDB with RealmEntity, RealmObjectBase, RealmObject {
   }
 
   static final schema = () {
-    RealmObjectBase.registerFactory(MovieDB._);
+    RealmObjectBase.registerFactory(FavoriteMovieDB._);
     register(_toEJson, _fromEJson);
-    return const SchemaObject(ObjectType.realmObject, MovieDB, 'MovieDB', [
+    return const SchemaObject(
+        ObjectType.realmObject, FavoriteMovieDB, 'FavoriteMovieDB', [
       SchemaProperty('adult', RealmPropertyType.bool),
       SchemaProperty('backdropPath', RealmPropertyType.string),
       SchemaProperty('genreIds', RealmPropertyType.int,

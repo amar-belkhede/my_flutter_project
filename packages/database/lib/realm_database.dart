@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:database/table/movie_db.dart';
 import 'package:realm/realm.dart';
 
@@ -5,23 +7,33 @@ class RealmDatabase {
   late final Realm _realm;
 
   RealmDatabase() {
-    final config = Configuration.local([MovieDB.schema]);
+    final config = Configuration.local([FavoriteMovieDB.schema]);
     _realm = Realm(config);
   }
 
-  void saveMovie(MovieDB movie) {
+  Future<void> saveMovie(FavoriteMovieDB movie) async {
     _realm.write(() {
       _realm.add(movie, update: true);
     });
   }
 
-  List<MovieDB> getMovies() {
-    return _realm.all<MovieDB>().toList();
+  Stream<List<FavoriteMovieDB>> getFavoriteMovies() {
+    final controller = StreamController<List<FavoriteMovieDB>>();
+    _realm.all<FavoriteMovieDB>().changes.listen(
+      (event) {
+        controller.add(event.results.toList());
+      },
+    );
+    return controller.stream;
   }
 
-  void deleteMovie(MovieDB movie) {
+  void deleteMovie(FavoriteMovieDB movie) {
+    var movieToDelete = _realm.find<FavoriteMovieDB>(movie.id);
+    if (movieToDelete == null) {
+      return;
+    }
     _realm.write(() {
-      _realm.delete(movie);
+      _realm.delete(movieToDelete);
     });
   }
 

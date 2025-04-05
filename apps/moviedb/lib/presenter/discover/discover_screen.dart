@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moviedb/di/configure_dependency.dart';
 import 'package:moviedb/presenter/discover/bloc/discover_bloc.dart';
-import 'package:moviedb/repository/movie_repository.dart';
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
@@ -41,8 +39,12 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 title: Text(movie?.title ?? ""),
                 subtitle: Text(movie?.overview ?? ""),
                 trailing: InkWell(
-                    onTap: () => _discoverBloc.add(SaveMovieEvent(movie!)),
-                    child: const Icon(Icons.bookmark_border_rounded)),
+                    onTap: () => _discoverBloc.add((movie?.favorite == false)
+                        ? SaveMovieEvent(movie!)
+                        : DeleteMovieEvent(movie!)),
+                    child: movie?.favorite ?? false
+                        ? const Icon(Icons.bookmark)
+                        : const Icon(Icons.bookmark_border_rounded)),
               );
             },
           );

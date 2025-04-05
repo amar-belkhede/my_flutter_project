@@ -3,7 +3,7 @@ import "package:realm/realm.dart";
 part 'movie_db.realm.dart';
 
 @RealmModel()
-class _MovieDB {
+class _FavoriteMovieDB {
   late bool adult;
   late String backdropPath;
   late List<int> genreIds;
